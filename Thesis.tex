@@ -165,13 +165,13 @@
 	\maketitle	
 	\thispagestyle{firstpage} % Remove numbering in footer
 	
-	\include{Abstract}
+	\include{Chapters/Abstract}
 	\tableofcontents
-	\include{Introduction}
-	\include{Typography}
-	\include{Images}
-	\include{Formulas}
-	\include{Conclusion}
+	\include{Chapters/Introduction}
+	\include{Chapters/Typography}
+	\include{Chapters/Images}
+	\include{Chapters/Formulas}
+	\include{Chapters/Conclusion}
 	\printglossary
 	\newpage
 	\bibliography{quotations}
@@ -182,9 +182,9 @@
 	\newpage
 	\phantomsection %needed that toc links work
 	\addcontentsline{toc}{section}{Declaration of Academic Integrity}
-	\include{AuthenticityAgreement}
+	\include{Chapters/AuthenticityAgreement}
 	\phantomsection %needed that toc links work
 	\addcontentsline{toc}{section}{Appendix}
-	\include{Appendix}
+	\include{Chapters/Appendix}
 	
 \end{document}
