@@ -1,0 +1,190 @@
+\documentclass[12pt,a4paper,hidelinks]{article}
+
+% General
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage[export]{adjustbox}
+\usepackage{wrapfig}
+\usepackage{caption}
+
+\captionsetup{
+	justification = raggedright,
+	singlelinecheck = false
+}
+
+% Page Layout
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	left=25mm,
+	top=35mm,
+	right=25mm,
+	bottom=30mm,
+	%headsep=10mm,
+	%head=0mm,
+	foot=15mm,
+	headheight=50mm,
+}
+
+% Paragraphs
+%\setlength{\parindent}{0pt}
+\usepackage{parskip}
+\renewcommand{\baselinestretch}{1.2}
+  
+% Header / Footer
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancyhead[L]{
+	\hspace{-0.61cm}\includegraphics[width=9cm]{Resources/Document/fhnw-logo.pdf}
+}
+\fancyhead[R]{
+	\includegraphics[width=4.5cm]{Resources/Document/mse-logo.pdf}	
+}
+
+\cfoot{}
+\fancyfoot[L]{
+	Page \thepage\ of \pageref{LastPage}
+}
+\fancyfoot[R]{}
+
+\fancypagestyle{firstpage}{	
+	\fancyfoot[L]{}
+	\fancyfoot[C]{IP-920bb}
+	\fancyfoot[R]{}
+}
+
+% Todos
+\usepackage{todonotes}
+\usepackage{xcolor}
+\newcommand\mytodo[1]{\textcolor{red}{TODO: #1}}
+
+% Debug
+\usepackage{layout}
+
+% Bibliography
+\bibliographystyle{IEEEtran}
+
+% References
+\usepackage{hyperref}
+\usepackage{nameref}
+\newcommand\myref[1]{(see \ref{#1} \nameref{#1})}
+
+% Foot notes
+\usepackage[bottom]{footmisc}
+
+% Glossary
+% see https://www.dickimaw-books.com/gallery/glossaries-styles/#long
+\usepackage[nogroupskip,toc,nonumberlist]{glossaries}
+%\usepackage[style=long2colheader]{glossaries-extra}
+
+%\renewcommand*\pagelistname{Pages}
+%\setlength{\LTleft}{-5pt}
+%\setlength{\glsdescwidth}{8.5cm}
+
+\loadglsentries{Glossary.tex}
+\makeglossaries
+
+% Footnotes
+\makeatletter
+\renewcommand\@makefntext[1]{\leftskip=2em\hskip-2em\@makefnmark#1}
+\def\footnoterule{\kern-3mm\kern-3\p@
+  \hrule \@width 2in \kern 2.6\p@
+  \kern 2mm}
+\makeatother
+
+% Drawing
+\usepackage{tikz}
+\definecolor{fhnw_yellow}{rgb}{0.992, 0.905, 0.054}
+\definecolor{my_orange}{rgb}{0.988, 0.792, 0.274}
+\definecolor{my_red}{rgb}{0.847, 0.278, 0.25}
+\definecolor{my_green}{rgb}{0.631, 0.756, 0.506}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{tabu}
+\usepackage{tabularx}
+\usepackage{colortbl}
+
+% Table of contents
+\usepackage{tocloft}
+\usepackage[nottoc]{tocbibind}
+
+\setcounter{tocdepth}{2}
+
+\renewcommand{\cftpartfont}{\normalfont} % make parts look like sections in TOC
+\renewcommand{\cftpartpagefont}{\normalfont}
+
+\setlength{\cftbeforepartskip}{0pt} % remove spaces before and after chapters
+\setlength{\cftfigindent}{0pt} % remove indentation from figures in lof
+\setlength{\cfttabindent}{0pt} % remove indentation from tables in lot
+
+\tocloftpagestyle{fancy}
+
+% Code highlighting
+\usepackage[newfloat]{minted}
+\usepackage{xpatch}
+
+\newenvironment{code}{\captionsetup{type=listing}}{}
+\SetupFloatingEnvironment{listing}{name=Source Code}
+
+\usemintedstyle{tango}
+
+\renewcommand{\theFancyVerbLine}{\textcolor[rgb]{0.6,0.6,0.6}{\arabic{FancyVerbLine}}}
+
+\xpatchcmd{\mintinline}{\begingroup}{\begingroup\let\itshape\relax}{}{}
+\xpatchcmd{\minted}{\VerbatimEnvironment}{\VerbatimEnvironment\let\itshape\relax}{}{}
+
+
+% Document
+\begin{document}
+	%\layout % Debug page layout
+	\title{
+		\vspace{50mm}
+		\Huge{latex thesis template title}\\
+	}
+	\author{
+		\\\\\normalsize{Author}\\
+		Markus Mächler\\~\\
+		\normalsize{Supervisor}\\
+		Prof. Dr. Lorem Ipsum\\~\\
+		\normalsize{University}\\
+		Institute of Mobile and Distributed Systems\\
+		FHNW\\~\\
+	}
+	\date{\normalsize{January 1, 1970}}
+	\maketitle	
+	\thispagestyle{firstpage} % Remove numbering in footer
+	
+	\include{Abstract}
+	\tableofcontents
+	\include{Introduction}
+	\include{Typography}
+	\include{Images}
+	\include{Formulas}
+	\include{Conclusion}
+	\printglossary
+	\newpage
+	\bibliography{quotations}
+	\newpage
+	\listoffigures
+	\newpage
+	\listoftables
+	\newpage
+	\phantomsection %needed that toc links work
+	\addcontentsline{toc}{section}{Declaration of Academic Integrity}
+	\include{AuthenticityAgreement}
+	\phantomsection %needed that toc links work
+	\addcontentsline{toc}{section}{Appendix}
+	\include{Appendix}
+	
+\end{document}

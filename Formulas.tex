@@ -1,0 +1,58 @@
+\section{Formulas}
+\label{sec:formulas}
+
+\begin{align}
+	\textbf{AVG} ={}& \dfrac{1}{n} \, \sum_{i=1}^{n} \, a\textsubscript{i}
+	\label{eq:formulas:average}
+\end{align}
+
+The average calculated per data window neglects all the past data windows and is relatively sensitive to outliers.
+To make it more robust to temporary changes we can use the exponentially weighted moving average.
+It is a combination of the current data window and the past data windows.
+It weighs the current computed average by a factor $\alpha$ (e.g. 0.1) and all the past values combined by a factor 1 - $\alpha$ (e.g. 0.9).
+It never really \textit{forgets} about the past, but weighs past values exponentially less with each step.
+
+\begin{align}
+    \textbf{EWMA($\alpha$)\textsubscript{t}} = 
+	\begin{cases} 
+		\ \mbox{AVG}\textsubscript{t}, & \mbox{if } t\mbox{ = 1} \\ 
+		\ \alpha * \mbox{AVG}\textsubscript{t} + (1 - \alpha) * \mbox{AVG}\textsubscript{t-1} , & \mbox{if } t\mbox{ $>$ 1}
+	\end{cases}
+	\label{eq:formulas:moving_average}
+\end{align}
+
+\begin{align}
+	\textbf{MAD(X)} = median(\Bigl| \ \mbox{X\textsubscript{i}} - median(\mbox{X}) \ \Bigl|)
+	\label{eq:formulas:mad}
+\end{align}
+
+\begin{align}
+\begin{split}
+    \textbf{P} ={}& number\,of\,positives\,in\,ground\,truth
+\end{split}\\
+\begin{split}
+    \textbf{N} ={}& number\,of\,negatives\,in\,ground\,truth
+\end{split}\\
+\begin{split}
+    \textbf{TP} ={}& number\,of\,true\,positives
+\end{split}\\
+\begin{split}
+    \textbf{FP} ={}& number\,of\,false\,positives
+\end{split}\\
+\begin{split}
+    \textbf{FN} ={}& number\,of\,false\,negatives
+\end{split}\\[1ex]
+\begin{split}
+    \textbf{recall} ={}& \frac{TP}{TP+FN} \label{eq:results:recall}
+\end{split}\\[1ex]
+\begin{split}
+    \textbf{precision} ={}& \frac{TP}{TP+FP} \label{eq:formulas:precision}
+\end{split}\\[1ex]
+\begin{split}
+    \textbf{F1 score} ={}& 2 * \frac{precision * recall}{precision + recall} \label{eq:formulas:f1}
+\end{split}\\[1ex]
+\begin{split}
+    \textbf{accuracy} ={}& \frac{TP+TN}{P+N} \label{eq:formulas:accuracy}
+\end{split}
+\end{align}
+
